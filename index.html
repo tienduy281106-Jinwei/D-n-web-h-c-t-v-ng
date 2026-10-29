@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VocabMaster - Hệ Thống Học Từ Vựng Tiếng Anh Thông Minh</title>
+  <meta name="description"
+    content="Trang web học từ vựng tiếng Anh hiện đại: Quản lý từ vựng cá nhân, ôn tập Flashcard 3D, kiểm tra trắc nghiệm, học ngữ pháp và luyện đặt câu thông minh.">
+
+  <!-- Google Fonts: Be Vietnam Pro + Inter + Plus Jakarta Sans (Full Vietnamese Subset Support) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+
+  <div class="app-container">
+
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-logo">LV</div>
+        <span class="brand-name">Learning Vocabulary</span>
+      </div>
+
+      <ul class="nav-menu">
+        <li class="nav-item active" data-tab="dashboard">
+          <a class="nav-link"><i class="fa-solid fa-chart-pie"></i> Bảng điều khiển</a>
+        </li>
+        <li class="nav-item" data-tab="vocabulary">
+          <a class="nav-link"><i class="fa-solid fa-book-open"></i> Kho từ vựng</a>
+        </li>
+        <li class="nav-item" data-tab="all-vocab">
+          <a class="nav-link"><i class="fa-solid fa-table-list"></i> Tổng hợp tất cả từ vựng</a>
+        </li>
+        <li class="nav-item" data-tab="flashcards">
+          <a class="nav-link"><i class="fa-solid fa-clone"></i> Ôn tập Flashcards</a>
+        </li>
+        <li class="nav-item" data-tab="quiz">
+          <a class="nav-link"><i class="fa-solid fa-circle-question"></i> Kiểm tra từ vựng</a>
+        </li>
+        <li class="nav-item" data-tab="topic-quiz">
+          <a class="nav-link"><i class="fa-solid fa-clipboard-check" style="color:var(--color-accent);"></i> Kiểm tra theo Topic</a>
+        </li>
+        <li class="nav-item" data-tab="grammar">
+          <a class="nav-link"><i class="fa-solid fa-graduation-cap"></i> Góc ngữ pháp</a>
+        </li>
+        <li class="nav-item" data-tab="rank">
+          <a class="nav-link"><i class="fa-solid fa-trophy"></i> Đấu hạng ngữ pháp</a>
+        </li>
+        <li class="nav-item" data-tab="sentences">
+          <a class="nav-link"><i class="fa-solid fa-pen-nib"></i> Tập đặt câu</a>
+        </li>
+        <li class="nav-item" data-tab="reading">
+          <a class="nav-link"><i class="fa-solid fa-book-open-reader"></i> Đọc hiểu</a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <button class="theme-toggle-btn" id="theme-toggle">
+          <div class="theme-icon-container">
+            <i class="fa-solid fa-moon" id="theme-icon"></i>
+            <span id="theme-text">Chế độ tối</span>
+          </div>
+          <i class="fa-solid fa-rotate"></i>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+      <!-- APP HEADER -->
+      <header class="app-header">
+        <!-- ROBOT DOG MASCOT + TYPEWRITER SPEECH BUBBLE -->
+        <div class="robot-mascot-section">
+          <div class="robot-dog-wrap">
+
+            <!-- CSS Robot Dog -->
+            <div class="robot-dog">
+              <!-- Antenna -->
+              <div class="robot-antenna">
+                <div class="robot-antenna-ball"></div>
+                <div class="robot-antenna-pole"></div>
+              </div>
+              <!-- Head -->
+              <div class="robot-head">
+                <div class="robot-ear robot-ear--l"></div>
+                <div class="robot-ear robot-ear--r"></div>
+                <div class="robot-eyes">
+                  <div class="robot-eye">
+                    <div class="robot-pupil"></div>
+                  </div>
+                  <div class="robot-eye">
+                    <div class="robot-pupil"></div>
+                  </div>
+                </div>
+                <div class="robot-mouth-zone">
+                  <div class="robot-nose-btn"></div>
+                  <div class="robot-smile-bar"></div>
+                </div>
+              </div>
+              <!-- Body -->
+              <div class="robot-body">
+                <div class="robot-leds">
+                  <div class="robot-led rl1"></div>
+                  <div class="robot-led rl2"></div>
+                  <div class="robot-led rl3"></div>
+                </div>
+              </div>
+              <!-- Legs -->
+              <div class="robot-feet">
+                <div class="robot-foot"></div>
+                <div class="robot-foot"></div>
+                <div class="robot-foot"></div>
+                <div class="robot-foot"></div>
+              </div>
+              <!-- Tail -->
+              <div class="robot-tail-wrap">
+                <div class="robot-tail"></div>
+              </div>
+            </div>
+
+            <!-- Speech Bubble -->
+            <div class="robot-bubble">
+              <span id="robot-typewriter"></span><span class="robot-cursor">|</span>
+            </div>
+
+          </div>
+          <p id="current-date-txt" class="robot-date-txt"></p>
+        </div>
+
+        <div class="stats-summary-header">
+          <div class="stat-header-item">
+            <i class="fa-solid fa-database"></i>
+            <div>
+              <span class="stat-header-value" id="header-total-vocab">0</span>
+              <span class="stat-header-label">Đã lưu</span>
+            </div>
+          </div>
+          <div class="stat-header-item">
+            <i class="fa-solid fa-circle-check" style="color: var(--color-success);"></i>
+            <div>
+              <span class="stat-header-value" id="header-mastered-vocab">0</span>
+              <span class="stat-header-label">Đã thuộc</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ---------------------------------------------------- -->
+      <!-- SECTION: DASHBOARD -->
+      <!-- ---------------------------------------------------- -->
+      <section class="page-section active" id="sec-dashboard">
+        <!-- Stats Widgets -->
+        <div class="widget-stats">
+          <div class="stat-card vocab">
+            <div class="stat-icon"><i class="fa-solid fa-book"></i></div>
+            <div class="stat-num" id="dash-stat-vocab">0</div>
+            <div class="stat-name">Từ vựng đã nhập</div>
+          </div>
+          <div class="stat-card mastered">
+            <div class="stat-icon"><i class="fa-solid fa-brain"></i></div>
+            <div class="stat-num" id="dash-stat-mastered">0</div>
+            <div class="stat-name">Từ vựng đã ghi nhớ</div>
+          </div>
+          <div class="stat-card sentences">
+            <div class="stat-icon"><i class="fa-solid fa-quote-right"></i></div>
+            <div class="stat-num" id="dash-stat-sentences">0</div>
+            <div class="stat-name">Câu tiếng Anh đã đặt</div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <!-- Left Dashboard Panels -->
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <!-- Motivation Quote Widget -->
+            <div class="panel quote-panel">
+              <i class="fa-solid fa-quote-left"></i>
+              <p class="quote-content" id="quote-text">"The limits of my language mean the limits of my world."</p>
+              <div class="quote-author" id="quote-author">— Ludwig Wittgenstein</div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="panel">
+              <h3 class="panel-title"><i class="fa-solid fa-bolt"></i> Thao tác nhanh</h3>
+              <div class="quick-start-grid">
+                <a class="quick-btn add" data-action="go-vocab-add">
+                  <i class="fa-solid fa-plus"></i>
+                  <span>Thêm từ mới</span>
+                </a>
+                <a class="quick-btn flash" data-action="go-flash">
+                  <i class="fa-solid fa-clone"></i>
+                  <span>Luyện Flashcards</span>
+                </a>
+                <a class="quick-btn quiz" data-action="go-quiz">
+                  <i class="fa-solid fa-circle-question"></i>
+                  <span>Làm kiểm tra</span>
+                </a>
+                <a class="quick-btn sentence" data-action="go-sentence">
+                  <i class="fa-solid fa-pen-nib"></i>
+                  <span>Tập đặt câu</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Dashboard Panel: Recent Added Words -->
+          <div class="panel">
+            <div class="panel-header">
+              <h3 class="panel-title"><i class="fa-solid fa-clock-rotate-left"></i> Từ vựng thêm gần đây</h3>
+              <button class="btn btn-secondary btn-sm" data-action="go-vocab-list">Xem tất cả</button>
+            </div>
+            <div class="recent-list" id="dashboard-recent-vocab">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------------------------------------------------- -->
+      <!-- SECTION: VOCABULARY -->
+      <!-- ---------------------------------------------------- -->
+      <section class="page-section" id="sec-vocabulary">
+        
+        <!-- TOPIC SELECTION BANNER / PILLS BAR -->
+        <div class="topic-selection-card" id="topic-selection-card">
+          <div class="topic-bar-header">
+            <div class="topic-bar-title">
+              <i class="fa-solid fa-layer-group"></i>
+              <span>Chọn Chủ Đề Học (Topic):</span>
+            </div>
+            <div class="topic-bar-stats" id="topic-bar-stats" style="font-size: 13px; color: var(--text-muted);">
+              <!-- JS renders stats -->
+            </div>
+            <button class="btn btn-secondary btn-sm" id="btn-quick-topic-test" style="border-radius: 20px; padding: 5px 14px; font-size: 12px; background: rgba(99,102,241,0.2); color: var(--color-primary-light); border: 1px solid var(--color-primary); cursor: pointer;">
+              <i class="fa-solid fa-bolt"></i> Kiểm tra Topic này ngay
+            </button>
+          </div>
+        </div>
+        <div class="topic-pills-wrapper" id="topic-pills-wrapper">
+          <!-- JS renders dynamic topic buttons -->
+        </div>
+
+        <div class="vocab-layout">
+          <!-- Left: Add/Edit Form -->
+          <div class="panel">
+            <h3 class="panel-title" id="vocab-form-title"><i class="fa-solid fa-plus-circle"></i> Thêm từ vựng mới</h3>
+            <p style="color: var(--text-muted); font-size: 13px; margin-bottom: 20px;">
+              Nhập từ mới để lưu trữ vào kho từ vựng cá nhân của bạn.
+            </p>
+
+            <form id="vocab-form">
+              <input type="hidden" id="vocab-id">
+
+              <div class="form-group">
+                <label for="vocab-word">Từ tiếng Anh <span style="color:var(--color-accent)">*</span></label>
+                <input type="text" id="vocab-word" placeholder="Ví dụ: Ephemeral" required>
+              </div>
+
+              <div class="form-group">
+                <label for="vocab-topic"><i class="fa-solid fa-folder"></i> Chủ đề (Topic)</label>
+                <select id="vocab-topic" style="width: 100%; padding: 10px 12px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-glass); background: var(--bg-input); color: var(--text-main); font-weight: 500;">
+                  <option value="Coming and Going">✈️ Coming and Going (Du lịch & Di chuyển)</option>
+                  <option value="General">📚 Từ vựng chung (General)</option>
+                </select>
+              </div>
+
+              <div class="form-row" id="vocab-adv-fields-row" style="display: none;">
+                <div class="form-group">
+                  <label for="vocab-pronunciation">Phiên âm</label>
+                  <input type="text" id="vocab-pronunciation" placeholder="Ví dụ: /ɪˈfemərəl/">
+                </div>
+
+                <div class="form-group" style="flex-grow: 1;">
+                  <label>Loại từ</label>
+                  <div
+                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: var(--bg-input); padding: 10px 12px; border: 1px solid var(--border-glass); border-radius: var(--border-radius-sm);"
+                    id="vocab-types-checkboxes">
+                    <label
+                      style="display: flex; align-items: center; gap: 6px; text-transform: none; font-size: 13px; font-weight: normal; cursor: pointer; color: var(--text-main); margin-bottom: 0;">
+                      <input type="checkbox" name="vocab-type-cb" value="noun" style="width: auto; cursor: pointer;">
+                      Danh từ
+                    </label>
+                    <label
+                      style="display: flex; align-items: center; gap: 6px; text-transform: none; font-size: 13px; font-weight: normal; cursor: pointer; color: var(--text-main); margin-bottom: 0;">
+                      <input type="checkbox" name="vocab-type-cb" value="verb" style="width: auto; cursor: pointer;">
+                      Động từ
+                    </label>
+                    <label
+                      style="display: flex; align-items: center; gap: 6px; text-transform: none; font-size: 13px; font-weight: normal; cursor: pointer; color: var(--text-main); margin-bottom: 0;">
+                      <input type="checkbox" name="vocab-type-cb" value="adjective"
+                        style="width: auto; cursor: pointer;"> Tính từ
+                    </label>
+                    <label
+                      style="display: flex; align-items: center; gap: 6px; text-transform: none; font-size: 13px; font-weight: normal; cursor: pointer; color: var(--text-main); margin-bottom: 0;">
+                      <input type="checkbox" name="vocab-type-cb" value="adverb" style="width: auto; cursor: pointer;">
+                      Trạng từ
+                    </label>
+                    <label
+                      style="display: flex; align-items: center; gap: 6px; text-transform: none; font-size: 13px; font-weight: normal; cursor: pointer; color: var(--text-main); margin-bottom: 0;">
+                      <input type="checkbox" name="vocab-type-cb" value="preposition"
+                        style="width: auto; cursor: pointer;"> Giới từ
+                    </label>
+                    <label
+                      style="display: flex; align-items: center; gap: 6px; text-transform: none; font-size: 13px; font-weight: normal; cursor: pointer; color: var(--text-main); margin-bottom: 0;">
+                      <input type="checkbox" name="vocab-type-cb" value="conjunction"
+                        style="width: auto; cursor: pointer;"> Liên từ
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="vocab-definition">Nghĩa tiếng Việt <span style="color:var(--color-accent)">*</span></label>
+                <input type="text" id="vocab-definition" placeholder="Ví dụ: Phù du, ngắn ngủi" required>
+              </div>
+
+              <div style="margin-bottom: 12px; margin-top: -4px;">
+                <button type="button" id="vocab-toggle-adv-btn" style="background: none; border: none; color: var(--color-primary-light); font-size: 13px; font-weight: 500; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 4px 0;">
+                  <i class="fa-solid fa-sliders"></i> <span id="vocab-toggle-adv-text">Tùy chọn nâng cao (Phiên âm, Ví dụ, Ngữ pháp...)</span>
+                </button>
+              </div>
+
+              <div class="form-group" id="vocab-adv-fields-eg" style="display: none;">
+                <label for="vocab-example">Ví dụ minh họa (Tiếng Anh)</label>
+                <textarea id="vocab-example" rows="2" placeholder="Ví dụ: Life is short and ephemeral."></textarea>
+              </div>
+
+              <div class="form-group" id="vocab-adv-fields-eg-vi" style="display: none;">
+                <label for="vocab-example-translation">Dịch nghĩa ví dụ (Tiếng Việt)</label>
+                <textarea id="vocab-example-translation" rows="2"
+                  placeholder="Ví dụ: Cuộc đời thật ngắn ngủi và phù du."></textarea>
+              </div>
+
+              <div class="form-group" id="vocab-adv-fields-grammar" style="display: none;">
+                <label for="vocab-grammar-pattern">
+                  <i class="fa-solid fa-diagram-project" style="color: #ff9800;"></i>
+                  Cú pháp ngữ pháp sau từ
+                </label>
+                <input type="text" id="vocab-grammar-pattern"
+                  placeholder="Ví dụ: persist in/with + V-ing | sb to do sth | + of + N">
+                <small style="color: var(--text-muted); font-size: 11px; margin-top: 4px; display: block;">
+                  Nhập cú pháp / colocation đi theo sau từ này (tùy chọn, để trống nếu không có)
+                </small>
+              </div>
+
+              <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <button type="submit" class="btn btn-primary" style="flex-grow: 1;" id="vocab-btn-submit">
+                  <i class="fa-solid fa-floppy-disk"></i> Lưu từ vựng
+                </button>
+                <button type="button" class="btn btn-secondary" id="vocab-btn-cancel" style="display: none;">
+                  Hủy
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Right: Vocabulary List & Search -->
+          <div class="panel">
+            <div class="vocab-toolbar">
+              <div class="search-box">
+                <input type="search" id="vocab-search" placeholder="Tìm kiếm từ tiếng Anh hoặc nghĩa tiếng Việt...">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </div>
+
+              <select id="vocab-filter-topic" class="filter-select topic-select" style="min-width: 170px; font-weight: 600;">
+                <option value="all">🌐 Tất cả chủ đề</option>
+                <option value="Coming and Going">✈️ Coming and Going</option>
+                <option value="General">📚 Từ vựng chung</option>
+              </select>
+
+              <select id="vocab-filter-type" class="filter-select">
+                <option value="all">Tất cả loại từ</option>
+                <option value="noun">Danh từ</option>
+                <option value="verb">Động từ</option>
+                <option value="adjective">Tính từ</option>
+                <option value="adverb">Trạng từ</option>
+              </select>
+
+              <select id="vocab-filter-status" class="filter-select">
+                <option value="all">Tất cả trạng thái</option>
+                <option value="learning">Đang học</option>
+                <option value="mastered">Đã nhớ</option>
+              </select>
+            </div>
+
+            <div class="vocab-stats-bar" id="vocab-stats-bar"
+              style="margin-top: 15px; margin-bottom: 15px; font-size: 13px; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); padding: 10px 15px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-glass);">
+              <!-- JS will update stats info -->
+            </div>
+
+            <div class="vocab-grid" id="vocab-cards-container">
+              <!-- Card items rendered by JS -->
+            </div>
+
+            <div class="vocab-pagination" id="vocab-pagination-container"
+              style="margin-top: 25px; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;">
+              <!-- JS will render pagination buttons -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------------------------------------------------- -->
+      <!-- SECTION: ALL VOCABULARY TABLE (TỔNG HỢP TẤT CẢ TỪ VỰNG) -->
+      <!-- ---------------------------------------------------- -->
+      <section class="page-section" id="sec-all-vocab">
+        <div class="panel">
+          <div class="panel-header" style="flex-wrap: wrap; gap: 15px; margin-bottom: 20px;">
+            <div>
+              <h3 class="panel-title"><i class="fa-solid fa-table-list"></i> Tổng hợp tất cả từ vựng</h3>
+              <p style="color: var(--text-muted); font-size: 13px; margin-top: 4px;">
+                Bảng tổng hợp chi tiết toàn bộ từ vựng trong hệ thống bao gồm dạng từ loại, nghĩa tiếng Việt và các từ đồng nghĩa (paraphrase).
+              </p>
+            </div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button class="btn btn-secondary btn-sm" id="all-vocab-btn-export" title="Xuất dữ liệu danh sách từ vựng ra file CSV">
+                <i class="fa-solid fa-file-csv"></i> Xuất CSV
+              </button>
+              <button class="btn btn-secondary btn-sm" id="all-vocab-btn-copy" title="Sao chép bảng từ vựng vào bộ nhớ tạm">
+                <i class="fa-solid fa-copy"></i> Sao chép bảng
+              </button>
+            </div>
+          </div>
+
+          <!-- Toolbar: Search + Filters -->
+          <div class="vocab-toolbar" style="margin-bottom: 15px;">
+            <div class="search-box" style="flex-grow: 2;">
+              <input type="search" id="all-vocab-search" placeholder="Tìm từ tiếng Anh, nghĩa tiếng Việt hoặc từ đồng nghĩa paraphrase...">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+
+            <select id="all-vocab-filter-topic" class="filter-select topic-select" style="min-width: 170px; font-weight: 600;">
+              <option value="all">🌐 Tất cả chủ đề</option>
+              <option value="Coming and Going">✈️ Coming and Going</option>
+              <option value="General">📚 Từ vựng chung</option>
+            </select>
+
+            <select id="all-vocab-filter-type" class="filter-select">
+              <option value="all">Tất cả loại từ</option>
+              <option value="noun">Danh từ</option>
+              <option value="verb">Động từ</option>
+              <option value="adjective">Tính từ</option>
+              <option value="adverb">Trạng từ</option>
+              <option value="preposition">Giới từ</option>
+              <option value="conjunction">Liên từ</option>
+            </select>
+
+            <select id="all-vocab-filter-status" class="filter-select">
+              <option value="all">Tất cả trạng thái</option>
+              <option value="learning">Đang học</option>
+              <option value="mastered">Đã thuộc</option>
+            </select>
+
+            <select id="all-vocab-per-page" class="filter-select" style="width: auto;">
+              <option value="25">25 từ / trang</option>
+              <option value="50" selected>50 từ / trang</option>
+              <option value="100">100 từ / trang</option>
+              <option value="200">200 từ / trang</option>
+              <option value="all">Hiển thị tất cả</option>
+            </select>
+          </div>
+
+          <!-- Thống kê thông tin -->
+          <div class="vocab-stats-bar" id="all-vocab-stats-bar"
+            style="margin-bottom: 15px; font-size: 13px; color: var(--text-muted); display: flex; justify-content: space-between; align-items: center; background: rgba(255,255,255,0.02); padding: 10px 15px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-glass);">
+            <!-- Dynamic stats generated by JS -->
+          </div>
+
+          <!-- Bảng hiển thị từ vựng -->
+          <div class="all-vocab-table-wrapper" style="overflow-x: auto; border-radius: var(--border-radius-sm); border: 1px solid var(--border-glass);">
+            <table class="all-vocab-table" id="all-vocab-table">
+              <thead>
+                <tr>
+                  <th style="width: 60px; text-align: center;">STT</th>
+                  <th style="width: 200px;">Từ vựng</th>
+                  <th style="width: 140px;">Chủ đề (Topic)</th>
+                  <th style="width: 130px;">Dạng từ loại</th>
+                  <th>Nghĩa tiếng Việt</th>
+                  <th>Từ paraphrase đồng nghĩa</th>
+                  <th style="width: 200px;"><i class="fa-solid fa-diagram-project" style="color:#ff9800;"></i> Ngữ pháp sau từ</th>
+                </tr>
+              </thead>
+              <tbody id="all-vocab-table-body">
+                <!-- JS will inject table rows here -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Phân trang -->
+          <div class="vocab-pagination" id="all-vocab-pagination-container"
+            style="margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap;">
+            <!-- JS will render pagination buttons here -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------------------------------------------------- -->
+      <!-- SECTION: FLASHCARDS -->
+      <!-- ---------------------------------------------------- -->
+      <section class="page-section" id="sec-flashcards">
+        <div class="panel" style="max-width: 800px; margin: 0 auto; width: 100%;">
+          <div class="panel-header" style="flex-wrap: wrap; gap: 10px;">
+            <h3 class="panel-title"><i class="fa-solid fa-clone"></i> Học từ vựng qua Flashcards</h3>
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+              <select id="flash-filter-topic"
+                style="width: auto; padding: 6px 12px; font-size: 13px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-glass); background: var(--bg-input); color: var(--text-main); font-weight: 600; cursor: pointer;">
+                <option value="all">🌐 Tất cả chủ đề</option>
+                <option value="Coming and Going">✈️ Topic: Coming and Going</option>
+                <option value="General">📚 Topic: Từ vựng chung</option>
+              </select>
+              <select id="flash-filter-limit"
+                style="width: auto; padding: 6px 12px; font-size: 13px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-glass); background: var(--bg-input); color: var(--text-main); font-weight: 600; cursor: pointer;">
+                <option value="20">20 từ ngẫu nhiên</option>
+                <option value="50" selected>50 từ ngẫu nhiên</option>
+                <option value="100">100 từ ngẫu nhiên</option>
+                <option value="all">Tất cả các từ</option>
+              </select>
+              <button id="flash-btn-restart-session" class="btn btn-secondary"
+                style="padding: 6px 12px; font-size: 13px;">
+                <i class="fa-solid fa-rotate"></i> Lượt mới
+              </button>
+              <span id="flashcard-counter" class="flashcard-progress-text">0 / 0 từ</span>
+            </div>
+          </div>
+
+          <div class="flashcard-area">
+            <div class="flashcard-progress-bar">
+              <div class="flashcard-progress-fill" id="flash-progress-fill"></div>
+            </div>
+
+            <!-- The Flip Card -->
+            <div class="flashcard-container" id="flashcard-box">
+              <div class="flashcard-inner">
+                <!-- Front Side -->
+                <div class="flashcard-face flashcard-front">
+                  <div class="flashcard-hint"><i class="fa-solid fa-hand-pointer"></i> Nhấn vào thẻ để lật nghĩa</div>
+                  <div class="word" id="flash-word">Ephemeral</div>
+                  <div class="phonetic" id="flash-phonetic">/ɪˈfemərəl/</div>
+                  <div class="vocab-card-type" id="flash-type">adjective</div>
+                </div>
+
+                <!-- Back Side -->
+                <div class="flashcard-face flashcard-back">
+                  <div class="flashcard-hint"><i class="fa-solid fa-rotate-left"></i> Nhấn để xem lại mặt trước</div>
+                  <div class="definition" id="flash-definition">Phù du, ngắn ngủi</div>
+
+                  <div class="example-box" id="flash-example-box">
+                    <div class="eg-eng" id="flash-example">Fame is ephemeral.</div>
+                    <div class="eg-vi" id="flash-example-translation">Sự nổi tiếng thật phù du.</div>
+                  </div>
+
+                  <div class="flash-grammar-pattern" id="flash-grammar-pattern" style="display: none;">
+                    <i class="fa-solid fa-diagram-project"></i>
+                    <span id="flash-grammar-pattern-text"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Control Buttons -->
+            <div class="flashcard-controls">
+              <button class="btn btn-danger" id="flash-btn-again">
+                <i class="fa-solid fa-arrow-rotate-left"></i> Cần học lại
+              </button>
+              <button class="btn btn-secondary" id="flash-btn-speak">
+                <i class="fa-solid fa-volume-high"></i> Phát âm
+              </button>
+              <button class="btn btn-primary"
+                style="background: linear-gradient(135deg, var(--color-success) 0%, #00c853 100%); box-shadow: 0 4px 15px rgba(0, 200, 83, 0.3);"
+                id="flash-btn-know">
+                <i class="fa-solid fa-circle-check"></i> Đã thuộc từ này
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------------------------------------------------- -->
+      <!-- SECTION: QUIZ -->
+      <!-- ---------------------------------------------------- -->
+      <section class="page-section" id="sec-quiz">
+        <div class="panel quiz-container">
+
+          <!-- QUIZ SETUP / START SCREEN -->
+          <div id="quiz-setup-screen" class="quiz-setup">
+            <i class="fa-solid fa-brain" style="font-size: 64px; color: var(--color-primary-light);"></i>
+            <h2 style="font-size: 26px; font-weight: 700; margin-top: 10px;">Kiểm tra năng lực từ vựng</h2>
+            <p style="color: var(--text-muted); max-width: 500px; line-height: 1.6;">
+              Hệ thống sẽ lấy từ vựng theo chủ đề bạn chọn để tạo đề kiểm tra trắc nghiệm hoặc điền từ. Hãy thử sức ngay nào! 🎯
+            </p>
+
+            <!-- Cấu hình số lượng câu hỏi & chủ đề kiểm tra -->
+            <div
+              style="margin-top: 10px; margin-bottom: 25px; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); padding: 12px 20px; border-radius: var(--border-radius-sm);">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <label for="quiz-filter-topic" style="font-size: 14px; font-weight: 600; color: var(--text-main); margin-bottom: 0;">Chủ đề học:</label>
+                <select id="quiz-filter-topic"
+                  style="width: auto; padding: 6px 16px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-glass); background: var(--bg-input); color: var(--text-main); font-weight: 600; cursor: pointer;">
+                  <option value="all">🌐 Tất cả chủ đề</option>
+                  <option value="Coming and Going">✈️ Coming and Going</option>
+                  <option value="General">📚 Từ vựng chung</option>
+                </select>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <label for="quiz-question-count"
+                  style="font-size: 14px; font-weight: 600; color: var(--text-main); margin-bottom: 0;">Số câu hỏi:</label>
+                <select id="quiz-question-count"
+                  style="width: auto; padding: 6px 16px; border-radius: var(--border-radius-sm); border: 1px solid var(--border-glass); background: var(--bg-input); color: var(--text-main); font-weight: 600; cursor: pointer;">
+                  <option value="5">5 câu</option>
+                  <option value="10" selected>10 câu</option>
+                  <option value="20">20 câu</option>
+                  <option value="50">50 câu</option>
+                  <option value="all">Tất cả từ thuộc chủ đề</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="quiz-modes">
+              <div class="mode-card" id="quiz-mode-mcq">
+                <i class="fa-solid fa-list-check"></i>
+                <h3>Trắc nghiệm (MCQ)</h3>
+                <p>Chọn định nghĩa tiếng Việt đúng nhất cho từ tiếng Anh được hiển thị.</p>
+              </div>
+
+              <div class="mode-card" id="quiz-mode-fitb">
+                <i class="fa-solid fa-keyboard"></i>
+                <h3>Điền từ vào ô trống</h3>
+                <p>Hệ thống cho định nghĩa và ví dụ, bạn hãy nhập chính xác từ tiếng Anh cần tìm.</p>
+              </div>
+            </div>
+
+            <div style="margin-top: 30px; display: none;" id="quiz-empty-warning">
+              <p style="color: var(--color-warning); font-weight: 500;">
+                <i class="fa-solid fa-triangle-exclamation"></i> Bạn cần có tối thiểu <strong>4 từ đã thuộc</strong> để bắt đầu kiểm tra. Hãy học Flashcard và đánh dấu "Đã thuộc" thêm nhé!
+              </p>
+            </div>
+          </div>
+
+          <!-- QUIZ PLAY SCREEN -->
+          <div id="quiz-play-screen" class="quiz-active" style="display: none;">
+            <div class="quiz-header">
+              <span id="quiz-progress-text">Câu hỏi 1/5</span>
+              <span id="quiz-score-live">Điểm: 0</span>
+            </div>
+
+            <div class="flashcard-progress-bar" style="margin-bottom: 25px;">
+              <div class="flashcard-progress-fill" id="quiz-progress-fill" style="width: 20%;"></div>
+            </div>
+
+            <div class="quiz-question-box">
+              <span class="quiz-question-label" id="quiz-q-label">Hãy tìm nghĩa đúng của từ</span>
+              <h3 class="quiz-question-text" id="quiz-q-text">Ephemeral</h3>
+              <p class="quiz-question-sub" id="quiz-q-sub"></p>
+            </div>
+
+            <!-- MCQ Option Mode Container -->
+            <div class="quiz-options-grid" id="quiz-options-container">
+              <!-- JS will inject buttons here -->
+            </div>
+
+            <!-- Fill In The Blank Mode Container -->
+            <div class="quiz-input-container" id="quiz-input-container" style="display: none;">
+              <input type="text" id="quiz-input-answer" placeholder="Nhập từ tiếng Anh cần tìm..." autocomplete="off">
+              <button class="btn btn-primary" id="quiz-btn-submit-answer">Gửi đáp án</button>
+            </div>
+
+            <div style="text-align: right;">
+              <button class="btn btn-secondary" id="quiz-btn-next" style="display: none;">Tiếp tục <i
+                  class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+
+          <!-- QUIZ RESULTS SCREEN -->
+          <div id="quiz-result-screen" class="quiz-results" style="display: none;">
+            <i class="fa-solid fa-trophy" style="font-size: 60px; color: var(--color-warning);"
+              id="quiz-result-icon"></i>
+            <h2 id="quiz-result-title">Hoàn thành bài kiểm tra!</h2>
+            <p id="quiz-result-message">Chúc mừng bạn! Bạn đã thể hiện rất tốt mức độ hiểu biết từ vựng.</p>
+
+            <div class="score-circle">
+              <span class="score-value" id="quiz-final-score">4/5</span>
+              <span class="score-total">Chính xác</span>
+            </div>
+
+            <div style="display: flex; gap: 15px; margin-top: 20px;">
+              <button class="btn btn-primary" id="quiz-btn-restart">Làm bài test mới</button>
+              <button class="btn btn-secondary" id="quiz-btn-exit">Trở lại Dashboard</button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ---------------------------------------------------- -->
+      <!-- SECTION: TOPIC QUIZ (KIỂM TRA THEO TOPIC) -->
+      <!-- ---------------------------------------------------- -->
+      <section class="page-section" id="sec-topic-quiz">
+        <div class="panel">
+
+          <!-- 1. TOPIC QUIZ SETUP SCREEN -->
+          <div id="tquiz-setup-screen">
+            <div class="panel-header" style="margin-bottom: 25px;">
+              <div>
+                <h2 class="panel-title" style="font-size: 22px;">
+                  <i class="fa-solid fa-clipboard-check" style="color: var(--color-accent);"></i> 
+                  Kiểm tra từ vựng theo Topic
+                </h2>
+                <p style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">
+                  Chọn chủ đề và chế độ kiểm tra phù hợp để đánh giá mức độ ghi nhớ từ vựng của bạn.
+                </p>
+              </div>
+            </div>
+
+            <!-- Topic Cards Grid -->
+            <div style="margin-bottom: 30px;">
+              <h3 style="font-size: 15px; font-weight: 700; color: var(--text-main); margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-layer-group" style="color: var(--color-primary-light);"></i> 1. Chọn Topic kiểm tra
+              </h3>
+              <div class="topic-quiz-grid" id="tquiz-cards-grid">
+                <!-- JS will render topic selector cards here -->
+              </div>
+            </div>
+
+            <!-- Quiz Mode Cards Selection -->
+            <div style="margin-bottom: 30px;">
+              <h3 style="font-size: 15px; font-weight: 700; color: var(--text-main); margin-bottom: 15px; display: flex; align-items: center; gap: 8px;">
+                <i class="fa-solid fa-gamepad" style="color: var(--color-secondary);"></i> 2. Chọn hình thức kiểm tra
+              </h3>
+
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px;">
+                
+                <div class="tquiz-mode-card active" data-tmode="mcq" id="tmode-mcq">
+                  <div class="tquiz-mode-icon"><i class="fa-solid fa-list-check"></i></div>
+                  <h4>Trắc nghiệm (MCQ)</h4>
+                  <p>Chọn nghĩa tiếng Việt chính xác từ 4 phương án cho từ tiếng Anh.</p>
+                </div>
+
+                <div class="tquiz-mode-card" data-tmode="fitb" id="tmode-fitb">
+                  <div class="tquiz-mode-icon"><i class="fa-solid fa-keyboard"></i></div>
+                  <h4>Gõ từ tiếng Anh (FITB)</h4>
+                  <p>Nhìn nghĩa tiếng Việt và gợi ý phát âm IPA để nhập lại chính xác từ.</p>
+                </div>
+
+                <div class="tquiz-mode-card" data-tmode="audio" id="tmode-audio">
+                  <div class="tquiz-mode-icon"><i class="fa-solid fa-volume-high"></i></div>
+                  <h4>Luyện nghe phát âm</h4>
+                  <p>Nghe giọng đọc chuẩn bản ngữ và chọn từ vựng tương ứng.</p>
+                </div>
+
+                <div class="tquiz-mode-card" data-tmode="match" id="tmode-match">
+                  <div class="tquiz-mode-icon"><i class="fa-solid fa-puzzle-piece"></i></div>
+                  <h4>Ghép từ & Định nghĩa</h4>
+                  <p>Nối cặp từ tiếng Anh và nghĩa tiếng Việt trong bảng tương tác.</p>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Start Action Button -->
+            <div style="text-align: center; margin-top: 25px;">
+              <button class="btn btn-primary" id="btn-start-tquiz-custom" style="padding: 14px 40px; font-size: 16px; font-weight: 700; border-radius: var(--border-radius-md); box-shadow: var(--shadow-neon);">
+                <i class="fa-solid fa-play"></i> Bắt đầu bài kiểm tra Topic (<span id="tquiz-selected-topic-title">Coming and Going</span>)
+              </button>
+            </div>
+          </div>
+
+          <!-- 2. TOPIC QUIZ PLAY ARENA -->
+          <div id="tquiz-play-arena" style="display: none;">
+            
+            <!-- Top Header & Timer Bar -->
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+              <div>
+                <span class="vocab-card-type" id="tquiz-arena-topic-badge">✈️ Coming and Going</span>
+                <span style="font-weight: 700; font-size: 16px; margin-left: 8px; color: var(--text-main);" id="tquiz-arena-mode-badge">Trắc nghiệm</span>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 20px;">
+                <div style="font-family: var(--font-secondary); font-weight: 700; color: var(--color-warning);">
+                  <i class="fa-regular fa-clock"></i> <span id="tquiz-timer">00:00</span>
+                </div>
+                <div style="font-weight: 700; font-size: 15px; color: var(--color-success);">
+                  <i class="fa-solid fa-star"></i> Điểm: <span id="tquiz-live-score">0</span>
+                </div>
+                <button class="btn btn-secondary btn-sm" id="btn-tquiz-exit">
+                  <i class="fa-solid fa-xmark"></i> Thoát
+                </button>
+              </div>
+            </div>
+
+            <!-- Progress Bar -->
+            <div class="flashcard-progress-bar" style="margin-bottom: 25px;">
+              <div class="flashcard-progress-fill" id="tquiz-progress-fill" style="width: 0%;"></div>
+            </div>
+
+            <!-- STANDARD QUESTION BOX (For MCQ, FITB, AUDIO) -->
+            <div id="tquiz-standard-box">
+              <div class="quiz-question-box" style="text-align: center; position: relative;">
+                <span class="quiz-question-label" id="tquiz-q-label">Hãy chọn nghĩa tiếng Việt chính xác</span>
+                
+                <!-- Audio play button inside question box -->
+                <div style="margin-top: 10px; margin-bottom: 10px;">
+                  <button type="button" class="btn btn-secondary btn-sm" id="tquiz-q-speak" style="border-radius: 50px; padding: 8px 16px;">
+                    <i class="fa-solid fa-volume-high" style="color: var(--color-primary-light);"></i> Nghe âm thanh
+                  </button>
+                </div>
+
+                <h3 class="quiz-question-text" id="tquiz-q-text" style="font-size: 32px; margin-bottom: 8px;">Accommodation</h3>
+                <p class="quiz-question-sub" id="tquiz-q-sub" style="font-size: 15px; color: var(--text-muted);">/əˌkɒm.əˈdeɪ.ʃən/ • noun</p>
+              </div>
+
+              <!-- Options Grid for MCQ & Audio -->
+              <div class="quiz-options-grid" id="tquiz-options-container" style="margin-top: 25px;">
+                <!-- Options injected by JS -->
+              </div>
+
+              <!-- Input Box for FITB -->
+              <div class="quiz-input-container" id="tquiz-input-container" style="display: none; margin-top: 25px;">
+                <input type="text" id="tquiz-input-answer" placeholder="Nhập từ tiếng Anh chính xác..." autocomplete="off">
+                <button class="btn btn-primary" id="tquiz-btn-submit-fitb">Gửi đáp án</button>
+              </div>
+
+              <div style="text-align: right; margin-top: 20px;">
+                <button class="btn btn-secondary" id="tquiz-btn-next" style="display: none;">
+                  Câu tiếp theo <i class="fa-solid fa-arrow-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- MATCHING PAIRS GRID BOX -->
+            <div id="tquiz-matching-box" style="display: none;">
+              <div style="text-align: center; margin-bottom: 20px;">
+                <h4 style="font-size: 16px; font-weight: 700; color: var(--text-main);">
+                  <i class="fa-solid fa-hand-pointer" style="color: var(--color-secondary);"></i> Chọn 1 thẻ tiếng Anh và 1 thẻ tiếng Việt tương ứng
+                </h4>
+                <p style="font-size: 13px; color: var(--text-muted);">Các thẻ khớp nhau sẽ tự động biến mất. Nối hết để hoàn thành bài test!</p>
+              </div>
+
+              <div class="tquiz-match-grid" id="tquiz-match-grid-container">
+                <!-- Matching cards injected by JS -->
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 3. TOPIC QUIZ RESULT SCREEN -->
+          <div id="tquiz-result-screen" class="quiz-results" style="display: none; text-align: center; padding: 30px 20px;">
+            <div style="width: 90px; height: 90px; margin: 0 auto 20px; border-radius: 50%; background: rgba(123, 97, 255, 0.15); border: 2px solid var(--color-primary); display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-neon);">
+              <i class="fa-solid fa-award" style="font-size: 48px; color: var(--color-warning);" id="tquiz-res-icon"></i>
+            </div>
+
+            <h2 id="tquiz-res-title" style="font-size: 26px; font-weight: 800; margin-bottom: 8px;">Hoàn thành xuất sắc!</h2>
+            <p id="tquiz-res-subtitle" style="color: var(--text-muted); font-size: 15px; margin-bottom: 25px;">Bạn vừa hoàn tất bài kiểm tra chủ đề <strong id="tquiz-res-topic-name" style="color: var(--color-primary-light);">Coming and Going</strong>.</p>
+
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-bottom: 30px;">
+              <div class="score-circle" style="width: 130px; height: 130px;">
+                <span class="score-value" id="tquiz-res-score" style="font-size: 28px;">10/10</span>
+                <span class="score-total" id="tquiz-res-percent">100% Chính xác</span>
+              </div>
+
+              <div style="display: flex; flex-direction: column; justify-content: center; gap: 10px; text-align: left; background: var(--bg-glass); border: 1px solid var(--border-glass); padding: 15px 25px; border-radius: var(--border-radius-md);">
+                <div><i class="fa-regular fa-clock" style="color: var(--color-warning);"></i> Thời gian làm bài: <strong id="tquiz-res-time" style="color: var(--text-main);">01:45</strong></div>
+                <div><i class="fa-solid fa-check" style="color: var(--color-success);"></i> Đúng: <strong id="tquiz-res-correct" style="color: var(--color-success);">10 câu</strong></div>
+                <div><i class="fa-solid fa-xmark" style="color: var(--color-danger);"></i> Sai: <strong id="tquiz-res-wrong" style="color: var(--color-danger);">0 câu</strong></div>
+              </div>
+            </div>
+
+            <!-- Wrong items review -->
+            <div id="tquiz-wrong-review-box" style="display: none; text-align: left; max-width: 650px; margin: 0 auto 30px; background: rgba(255, 77, 106, 0.05); border: 1px solid rgba(255, 77, 106, 0.3); border-radius: var(--border-radius-md); padding: 20px;">
+              <h4 style="color: var(--color-danger); font-size: 15px; margin-bottom: 12px;"><i class="fa-solid fa-circle-exclamation"></i> Các từ vựng cần ôn lại:</h4>
+              <ul id="tquiz-wrong-list" style="list-style: disc; padding-left: 20px; font-size: 14px; color: var(--text-main); display: flex; flex-direction: column; gap: 6px;">
+                <!-- JS injects wrong items -->
+              </ul>
+            </div>
+
+            <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+              <button class="btn btn-primary" id="btn-tquiz-retry" style="padding: 12px 28px;">
+                <i class="fa-solid fa-rotate-right"></i> Thử lại bài này
+              </button>
+              <button class="btn btn-secondary" id="btn-tquiz-back-setup" style="padding: 12px 28px;">
+                <i class="fa-solid fa-list"></i> Chọn Topic khác
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ---------------------------------------------------- -->
+      <!-- SECTION: GRAMMAR -->
+      <!-- ---------------------------------------------------- -->
+      <section class="page-section" id="sec-grammar">
+        <div class="grammar-layout">
+          <!-- Left: List of lessons -->
+          <div class="panel">
+            <h3 class="panel-title" style="margin-bottom: 15px;"><i class="fa-solid fa-book"></i> Chủ điểm ngữ pháp</h3>
+            <div class="grammar-sidebar-list" id="grammar-lesson-list">
+              <!-- JS renders lessons list -->
+            </div>
+
+            <!-- User custom note area -->
+            <div style="margin-top: 25px; border-top: 1px solid var(--border-glass); padding-top: 20px;">
+              <h4 style="font-size: 14px; font-weight: 700; margin-bottom: 10px;">Thêm ghi chú ngữ pháp</h4>
+              <form id="grammar-form">
+                <div class="form-group">
+                  <input type="text" id="grammar-custom-title" placeholder="Tên chủ đề ngữ pháp..." required>
+                </div>
+                <div class="form-group">
+                  <input type="text" id="grammar-custom-formula" placeholder="Công thức (Ví dụ: S + V...)">
+                </div>
+                <div class="form-group">
+                  <textarea id="grammar-custom-explanation" rows="3" placeholder="Cách dùng, giải thích và lưu ý..."
+                    required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-sm" style="width: 100%;">
+                  <i class="fa-solid fa-plus"></i> Lưu chủ đề mới
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Right: Lesson details -->
+          <div class="panel" id="grammar-detail-panel">
+            <!-- Rendered by JS based on selection -->
+            <div class="grammar-detail-content" id="grammar-detail-view">
+              <div class="grammar-header-block">
+                <span class="vocab-card-type">Chủ đề</span>
+                <h2 class="grammar-title" id="g-view-title">Thì Hiện tại đơn</h2>
+                <div class="grammar-formula-card" id="g-view-formula">
+                  S + V(s/es)
+                </div>
+              </div>
+
+              <div>
+                <h3 class="grammar-section-title"><i class="fa-solid fa-circle-info"></i> Cách dùng & giải thích</h3>
+                <p class="grammar-text-explanation" id="g-view-explanation">
+                  Nội dung đang được cập nhật...
+                </p>
+              </div>
+
+              <div>
+                <h3 class="grammar-section-title"><i class="fa-solid fa-lightbulb"></i> Ví dụ minh họa</h3>
+                <div class="grammar-examples-list" id="g-view-examples">
+                  <!-- Example items -->
+                </div>
+              </div>
+
+              <div style="margin-top: 20px; text-align: right;" id="g-delete-action-container">
+                <!-- JS will inject delete button if it is a user-created note -->
+              </div>
+
+              <!-- PHẦN THỰC HÀNH NGỮ PHÁP TƯƠNG TÁC -->
+              <div style="margin-top: 30px; border-top: 1px solid var(--border-glass); padding-top: 25px;"
+                id="g-practice-container">
+                <h3 class="grammar-section-title"><i class="fa-solid fa-dumbbell"></i> Luyện tập ngữ pháp</h3>
+
+                <!-- Tab Buttons -->
+                <div style="display: flex; gap: 10px; margin-bottom: 20px;">
+                  <button type="button" class="btn btn-secondary btn-sm" id="g-btn-tab-write"
+                    style="border-radius: var(--border-radius-sm); border: 1px solid var(--border-active); background: rgba(123, 97, 255, 0.15);">
+                    <i class="fa-solid fa-pen-clip"></i> Luyện viết câu (Chấm điểm 10)
+                  </button>
+                  <button type="button" class="btn btn-secondary btn-sm" id="g-btn-tab-mcq"
+                    style="border-radius: var(--border-radius-sm);">
+                    <i class="fa-solid fa-list-check"></i> Trắc nghiệm chia động từ (10 câu)
+                  </button>
+                </div>
+
+                <!-- TAB 1: LUYỆN VIẾT CÂU -->
+                <div id="g-tab-content-write" style="display: flex; flex-direction: column; gap: 15px;">
+                  <p style="font-size: 13px; color: var(--text-muted);">
+                    Viết một câu tiếng Anh áp dụng đúng chủ điểm ngữ pháp ở trên. Hệ thống sẽ phân tích cấu trúc và chấm
+                    điểm trên thang điểm 10.
+                  </p>
+                  <div class="form-group">
+                    <textarea id="g-write-input" rows="3"
+                      placeholder="Nhập câu tiếng Anh bạn tự đặt ở đây..."></textarea>
+                  </div>
+                  <button type="button" class="btn btn-primary" id="g-write-btn-grade" style="align-self: flex-start;">
+                    <i class="fa-solid fa-graduation-cap"></i> Chấm điểm câu viết
+                  </button>
+
+                  <!-- Bảng kết quả chấm điểm -->
+                  <div id="g-write-result-box"
+                    style="display: none; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-glass); border-radius: var(--border-radius-md); padding: 20px; align-items: center; gap: 20px;">
+                    <div
+                      style="width: 80px; height: 80px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 800; border: 3px solid var(--color-primary); box-shadow: var(--shadow-neon);"
+                      id="g-write-score-circle">
+                      <span style="font-size: 24px;" id="g-write-score-val">0</span>
+                      <span
+                        style="font-size: 10px; color: var(--text-muted); font-family: var(--font-secondary);">Điểm</span>
+                    </div>
+                    <div style="flex-grow: 1;">
+                      <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 6px;" id="g-write-result-title">Kết
+                        quả chấm điểm</h4>
+                      <p style="font-size: 13px; line-height: 1.5; color: var(--text-muted);" id="g-write-result-desc">
+                        Nhận xét chi tiết của hệ thống...</p>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- TAB 2: TRẮC NGHIỆM CHIA ĐỘNG TỪ -->
+                <div id="g-tab-content-mcq" style="display: none; flex-direction: column; gap: 15px;">
+
+                  <!-- Setup / Màn hình bắt đầu làm test -->
+                  <div id="g-mcq-setup"
+                    style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 20px 0; gap: 15px;">
+                    <i class="fa-solid fa-file-signature" style="font-size: 40px; color: var(--color-secondary);"></i>
+                    <h4 style="font-weight: 700;">Bài kiểm tra trắc nghiệm 10 câu</h4>
+                    <p style="font-size: 13px; color: var(--text-muted); max-width: 450px; line-height: 1.5;">
+                      Hệ thống sẽ cung cấp 10 câu hỏi trắc nghiệm chia động từ của chủ điểm này. Mỗi câu đúng được tính
+                      1 điểm (tổng điểm tối đa là 10).
+                    </p>
+                    <button type="button" class="btn btn-primary" id="g-mcq-btn-start">Bắt đầu làm bài test</button>
+                  </div>
+
+                  <!-- Play / Màn hình đang chơi test -->
+                  <div id="g-mcq-play" style="display: none; flex-direction: column; gap: 15px;">
+                    <div
+                      style="display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); font-family: var(--font-secondary);">
+                      <span id="g-mcq-progress">Câu 1/10</span>
+                      <span id="g-mcq-score">Điểm: 0</span>
+                    </div>
+                    <div class="flashcard-progress-bar" style="margin-bottom: 10px;">
+                      <div class="flashcard-progress-fill" id="g-mcq-progress-fill" style="width: 10%;"></div>
+                    </div>
+
+                    <div class="quiz-question-box"
+                      style="padding: 20px; border-radius: var(--border-radius-sm); margin-bottom: 10px;">
+                      <h4 id="g-mcq-question-text" style="font-size: 16px; font-weight: 600; line-height: 1.5;">He
+                        usually (go) _______ to school by bus.</h4>
+                    </div>
+
+                    <!-- 4 options A, B, C, D -->
+                    <div class="quiz-options-grid" id="g-mcq-options" style="gap: 8px;">
+                      <!-- Buttons loaded by JS -->
+                    </div>
+
+                    <!-- Giải thích & Phản hồi -->
+                    <div id="g-mcq-feedback-box"
+                      style="display: none; padding: 12px 16px; background: rgba(0, 242, 254, 0.05); border-left: 3px solid var(--color-secondary); border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; font-size: 12px; line-height: 1.5;">
+                      <strong id="g-mcq-feedback-status" style="display: block; margin-bottom: 4px;">Chính xác!</strong>
+                      <span id="g-mcq-feedback-text">Giải thích: Vì chủ ngữ là He nên động từ go chia thành goes.</span>
+                    </div>
+
+                    <div style="text-align: right;">
+                      <button type="button" class="btn btn-secondary btn-sm" id="g-mcq-btn-next"
+                        style="display: none;">Câu tiếp theo <i class="fa-solid fa-arrow-right"></i></button>
+                    </div>
+                  </div>
+
+                  <!-- Result / Màn hình hiển thị kết quả -->
+                  <div id="g-mcq-result"
+                    style="display: none; flex-direction: column; align-items: center; text-align: center; padding: 25px 15px; gap: 20px;">
+                    <i class="fa-solid fa-graduation-cap" style="font-size: 50px; color: var(--color-warning);"
+                      id="g-mcq-res-icon"></i>
+                    <h4 style="font-size: 18px; font-weight: 700;" id="g-mcq-res-title">Hoàn thành bài kiểm tra!</h4>
+
+                    <div
+                      style="width: 100px; height: 100px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; font-weight: 800; border: 4px solid var(--color-success); box-shadow: var(--shadow-neon);">
+                      <span style="font-size: 32px;" id="g-mcq-res-score">8</span>
+                      <span style="font-size: 11px; color: var(--text-muted); font-family: var(--font-secondary);">/ 10
+                        điểm</span>
+                    </div>
+
+                    <p style="font-size: 13px; color: var(--text-muted); max-width: 400px; line-height: 1.5;"
+                      id="g-mcq-res-desc">
+                      Bạn đã đạt được kết quả khá tốt. Hãy tiếp tục học các cấu trúc tiếp theo nhé!
+                    </p>
+
+                    <div style="display: flex; gap: 10px;">
+                      <button type="button" class="btn btn-primary btn-sm" id="g-mcq-btn-restart">Làm lại bài
+                        test</button>
+                      <button type="button" class="btn btn-secondary btn-sm" id="g-mcq-btn-finish">Hoàn tất</button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------------------------------------------------- -->
+      <!-- SECTION: GRAMMAR RANK ARENA (ĐẤU HẠNG) -->
+      <!-- ---------------------------------------------------- -->
+      <section class="page-section" id="sec-rank">
+        <div class="panel" style="max-width: 800px; margin: 0 auto; width: 100%;">
+
+          <!-- SCREEN 1: RANK DASHBOARD (TỔNG QUAN XẾP HẠNG) -->
+          <div id="rank-dashboard-screen"
+            style="display: flex; flex-direction: column; align-items: center; gap: 30px; padding: 20px 0;">
+            <div style="text-align: center;">
+              <h2 style="font-size: 26px; font-weight: 700; margin-bottom: 6px;">Đấu Hạng Ngữ Pháp</h2>
+              <p style="color: var(--text-muted); font-size: 14px;">Chinh phục các cấp bậc ngữ pháp tiếng Anh từ dễ đến
+                cực khó!</p>
+            </div>
+
+            <!-- Huy hiệu Rank hiện tại (Visual) -->
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 15px;">
+              <div id="rank-badge-display"
+                style="width: 160px; height: 160px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 64px; color: white; position: relative; transition: transform 0.5s ease; box-shadow: var(--shadow-main);">
+                <i class="fa-solid fa-medal"></i>
+              </div>
+              <div style="text-align: center;">
+                <span
+                  style="font-size: 12px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1px;">Hạng
+                  hiện tại</span>
+                <h3 id="rank-name-display" style="font-size: 24px; font-weight: 800; margin-top: 2px;">Đồng (Bronze)
+                </h3>
+              </div>
+            </div>
+
+            <!-- Nút bắt đầu đấu hạng -->
+            <button type="button" class="btn btn-primary" id="rank-btn-start"
+              style="padding: 14px 40px; font-size: 16px; border-radius: var(--border-radius-md); background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);">
+              <i class="fa-solid fa-circle-play"></i> Bắt đầu Đấu Hạng
+            </button>
+
+            <!-- Sơ đồ Rank (Nấc thang tiến trình) -->
+            <div style="width: 100%; border-top: 1px solid var(--border-glass); padding-top: 25px; margin-top: 15px;">
+              <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 20px; text-align: center;"><i
+                  class="fa-solid fa-network-wired"></i> Bản đồ cấp bậc (Rank Map)</h4>
+              <div id="rank-map-container"
+                style="display: flex; justify-content: space-between; position: relative; padding: 0 10px; flex-wrap: wrap; gap: 15px; width: 100%;">
+                <!-- Renders the rank list with active / lock states by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- SCREEN 2: RANK MATCH PLAY (MÀN HÌNH ĐẤU HẠNG) -->
+          <div id="rank-play-screen" style="display: none; flex-direction: column; gap: 20px;">
+            <div
+              style="display: flex; justify-content: space-between; align-items: center; font-family: var(--font-secondary); font-size: 13px; color: var(--text-muted);">
+              <span id="rank-play-progress">Câu hỏi 1/5</span>
+              <span id="rank-play-score-live">Số câu đúng: 0</span>
+            </div>
+
+            <div class="flashcard-progress-bar" style="margin-bottom: 10px;">
+              <div class="flashcard-progress-fill" id="rank-play-progress-fill" style="width: 20%;"></div>
+            </div>
+
+            <!-- Khung câu hỏi -->
+            <div class="quiz-question-box"
+              style="padding: 30px; border-radius: var(--border-radius-md); text-align: center; border: 1px solid var(--border-glass); margin-bottom: 10px;">
+              <span class="quiz-question-label"
+                style="font-size: 12px; text-transform: uppercase; color: var(--color-secondary); letter-spacing: 1px;"
+                id="rank-play-level-tag">Cấp độ: Đồng</span>
+              <h3 id="rank-play-question-text"
+                style="font-size: 18px; font-weight: 600; line-height: 1.5; margin-top: 10px;">Question text loaded
+                here...</h3>
+            </div>
+
+            <!-- 4 phương án MCQ -->
+            <div class="quiz-options-grid" id="rank-play-options" style="gap: 10px;">
+              <!-- Inject A, B, C, D buttons by JS -->
+            </div>
+
+            <!-- Feedback giải thích đáp án (Beautiful) -->
+            <div id="rank-play-feedback" class="rank-feedback-box">
+              <!-- Header: Trạng thái đúng/sai -->
+              <div class="rank-feedback-header">
+                <div class="rank-feedback-icon" id="rank-feedback-icon-el">
+                  <i class="fa-solid fa-circle-check" id="rank-feedback-icon"></i>
+                </div>
+                <div>
+                  <div class="rank-feedback-status-text" id="rank-play-feedback-status">Chính xác!</div>
+                  <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;" id="rank-feedback-subtitle">
+                    +1 câu đúng</div>
+                </div>
+              </div>
+
+              <!-- Đáp án đúng (khi sai mới hiện) -->
+              <div class="rank-correct-answer-note" id="rank-correct-answer-note" style="display:none;">
+                <i class="fa-solid fa-lightbulb" style="color: var(--color-warning);"></i>
+                <span>Đáp án đúng là:</span>
+                <span class="correct-word" id="rank-correct-answer-text"></span>
+              </div>
+
+              <!-- Giải thích ngữ pháp -->
+              <div class="rank-feedback-explanation">
+                <i class="fa-solid fa-circle-info exp-icon"></i>
+                <div class="exp-text">
+                  <strong>Giải thích: </strong><span id="rank-play-feedback-text">Đang tải...</span>
+                </div>
+              </div>
+            </div>
+
+            <div style="text-align: right; margin-top: 8px;">
+              <button type="button" class="btn btn-secondary" id="rank-play-btn-next" style="display: none;">Câu tiếp
+                theo <i class="fa-solid fa-arrow-right"></i></button>
+            </div>
+          </div>
+
+          <!-- SCREEN 3: RANK MATCH RESULT (KẾT QUẢ ĐẤU HẠNG) -->
+          <div id="rank-result-screen"
+            style="display: none; flex-direction: column; align-items: center; text-align: center; padding: 30px 15px; gap: 20px;">
+            <i class="fa-solid fa-circle-up" style="font-size: 72px; color: var(--color-success);"
+              id="rank-res-icon"></i>
+            <h2 style="font-size: 26px; font-weight: 800;" id="rank-res-title">THĂNG HẠNG THÀNH CÔNG!</h2>
+            <p style="color: var(--text-muted); max-width: 450px; line-height: 1.6;" id="rank-res-desc">
+              Tuyệt vời! Bạn đã vượt qua cấp độ và xuất sắc thăng hạng lên bậc tiếp theo.
+            </p>
+
+            <div style="display: flex; align-items: center; gap: 20px; margin: 15px 0;">
+              <!-- Huy hiệu cũ -->
+              <div id="rank-res-badge-old"
+                style="width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 32px; background: var(--border-glass); opacity: 0.5;">
+                <i class="fa-solid fa-medal"></i>
+              </div>
+              <i class="fa-solid fa-arrow-right-long" style="font-size: 24px; color: var(--text-muted);"></i>
+              <!-- Huy hiệu mới -->
+              <div id="rank-res-badge-new"
+                style="width: 110px; height: 110px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 48px; box-shadow: var(--shadow-neon); border: 3px solid var(--color-secondary);">
+                <i class="fa-solid fa-trophy"></i>
+              </div>
+            </div>
+
+            <div style="font-size: 14px; font-weight: 600; color: var(--text-main); margin-bottom: 10px;"
+              id="rank-res-score-detail">
+              Đúng: 5 / 5 câu hỏi
+            </div>
+
+            <div style="display: flex; gap: 15px; margin-top: 10px;">
+              <button type="button" class="btn btn-primary" id="rank-res-btn-action">Tiếp tục leo rank</button>
+              <button type="button" class="btn btn-secondary" id="rank-res-btn-exit">Quay về Arena</button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ---------------------------------------------------- -->
+      <!-- SECTION: SENTENCES -->
+      <!-- ---------------------------------------------------- -->
+      <section class="page-section" id="sec-sentences">
+        <div class="sentence-layout">
+          <!-- Left: Practice Form -->
+          <div class="panel sentence-form-panel">
+            <h3 class="panel-title"><i class="fa-solid fa-pen-fancy"></i> Tập đặt câu với từ vựng</h3>
+            <p style="color: var(--text-muted); font-size: 13px;">
+              Luyện viết câu tiếng Anh chứa từ vựng đã học để tăng hiệu quả ghi nhớ và hiểu ngữ cảnh sử dụng.
+            </p>
+
+            <form id="sentence-form" style="display: flex; flex-direction: column; gap: 15px; margin-top: 10px;">
+              <div class="form-group">
+                <label for="sentence-vocab-select">Chọn từ vựng muốn đặt câu <span
+                    style="color:var(--color-accent)">*</span></label>
+                <select id="sentence-vocab-select" required>
+                  <option value="" disabled selected>-- Chọn một từ trong kho --</option>
+                  <!-- JS will load vocabulary items -->
+                </select>
+                <div id="sentence-vocab-guide" style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="sentence-english">Câu tiếng Anh của bạn <span
+                    style="color:var(--color-accent)">*</span></label>
+                <textarea id="sentence-english" rows="3" placeholder="Nhập câu tiếng Anh bạn tự viết ở đây..."
+                  required></textarea>
+                <div id="sentence-validation-msg" style="font-size: 12px; font-weight: 500; margin-top: 4px;"></div>
+              </div>
+
+              <div class="form-group">
+                <label for="sentence-vietnamese">Dịch nghĩa câu sang tiếng Việt <span
+                    style="color:var(--color-accent)">*</span></label>
+                <textarea id="sentence-vietnamese" rows="3" placeholder="Dịch nghĩa câu tiếng Việt ở đây..."
+                  required></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-primary" style="width: 100%;">
+                <i class="fa-solid fa-circle-check"></i> Lưu và kiểm tra câu
+              </button>
+            </form>
+          </div>
+
+          <!-- Right: List of sentence practices -->
+          <div class="panel sentence-list-panel">
+            <h3 class="panel-title" style="margin-bottom: 20px;"><i class="fa-solid fa-list-check"></i> Các câu đã đặt
+            </h3>
+            <div class="sentence-timeline" id="sentence-timeline-container">
+              <!-- Rendered by JS -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---------------------------------------------------- -->
+      <!-- SECTION: READING (Đọc hiểu + Công cụ dịch) -->
+      <!-- ---------------------------------------------------- -->
+      <section class="page-section" id="sec-reading">
+        <div class="reading-layout">
+
+          <!-- LEFT: Danh sách bài đọc -->
+          <div class="panel reading-list-panel">
+            <div class="panel-header" style="margin-bottom: 14px; flex-direction: column; align-items: stretch; gap: 10px;">
+              <h3 class="panel-title"><i class="fa-solid fa-book-open-reader"></i> Thư viện bài đọc</h3>
+              <!-- Nút import tất cả từ vựng -->
+              <button id="reading-btn-import-all-articles" class="btn btn-primary" style="width:100%; font-size:13px;">
+                <i class="fa-solid fa-cloud-arrow-down"></i> Nhập tất cả từ mới vào kho
+              </button>
+              <!-- Thanh tiến trình import toàn bộ -->
+              <div id="reading-import-all-bar" style="display:none; flex-direction:column; gap:6px;">
+                <div style="background:rgba(255,255,255,0.07); border-radius:20px; height:8px; overflow:hidden;">
+                  <div id="reading-import-all-fill" style="height:100%; width:0%; background:linear-gradient(90deg,var(--color-primary),var(--color-secondary)); border-radius:20px; transition:width 0.25s ease;"></div>
+                </div>
+                <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--text-muted);">
+                  <span id="reading-import-all-text">Đang xử lý...</span>
+                  <span id="reading-import-all-count"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Search -->
+            <div class="search-box" style="margin-bottom: 14px;">
+              <input type="search" id="reading-search" placeholder="Tìm tiêu đề bài đọc...">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+
+            <!-- Filter level -->
+            <div style="display:flex; gap:8px; margin-bottom: 16px; flex-wrap: wrap;">
+              <button class="reading-level-btn active" data-level="all">Tất cả</button>
+              <button class="reading-level-btn" data-level="beginner">Cơ bản</button>
+              <button class="reading-level-btn" data-level="intermediate">Trung cấp</button>
+              <button class="reading-level-btn" data-level="advanced">Nâng cao</button>
+            </div>
+
+            <div class="reading-articles-list" id="reading-articles-list">
+              <!-- JS renders article cards here -->
+            </div>
+
+            <!-- Add custom article -->
+            <div style="margin-top: 22px; border-top: 1px solid var(--border-glass); padding-top: 18px;">
+              <h4 style="font-size: 13px; font-weight: 700; margin-bottom: 12px; color: var(--text-muted);">
+                <i class="fa-solid fa-plus-circle"></i> Thêm bài đọc của bạn
+              </h4>
+              <form id="reading-add-form" style="display:flex; flex-direction:column; gap:10px;">
+                <input type="text" id="reading-add-title" placeholder="Tiêu đề bài đọc..." required
+                  style="padding:8px 12px; border-radius:var(--border-radius-sm); border:1px solid var(--border-glass); background:var(--bg-input); color:var(--text-main); font-size:13px;">
+                <select id="reading-add-level"
+                  style="padding:8px 12px; border-radius:var(--border-radius-sm); border:1px solid var(--border-glass); background:var(--bg-input); color:var(--text-main); font-size:13px;">
+                  <option value="beginner">Cơ bản</option>
+                  <option value="intermediate" selected>Trung cấp</option>
+                  <option value="advanced">Nâng cao</option>
+                </select>
+                <textarea id="reading-add-content" rows="5" placeholder="Dán nội dung bài đọc tiếng Anh vào đây..." required
+                  style="padding:10px 12px; border-radius:var(--border-radius-sm); border:1px solid var(--border-glass); background:var(--bg-input); color:var(--text-main); font-size:13px; resize:vertical;"></textarea>
+                <button type="submit" class="btn btn-primary btn-sm" style="width:100%;">
+                  <i class="fa-solid fa-plus"></i> Lưu bài đọc
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- RIGHT: Đọc bài + Công cụ dịch -->
+          <div class="panel reading-content-panel" id="reading-content-panel">
+
+            <!-- Empty state -->
+            <div id="reading-empty-state" style="display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%; min-height:350px; gap:16px; color:var(--text-muted); text-align:center;">
+              <i class="fa-solid fa-book-open" style="font-size:56px; opacity:0.3;"></i>
+              <p style="font-size:15px;">Chọn một bài đọc từ danh sách bên trái để bắt đầu</p>
+            </div>
+
+            <!-- Article view (hidden until selected) -->
+            <div id="reading-article-view" style="display:none;">
+
+              <!-- Article header -->
+              <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:20px; flex-wrap:wrap;">
+                <div>
+                  <span class="reading-level-badge" id="reading-view-level-badge">Trung cấp</span>
+                  <h2 id="reading-view-title" style="font-size:20px; font-weight:700; margin-top:6px; line-height:1.4;"></h2>
+                </div>
+                <div style="display:flex; gap:8px; flex-shrink:0;">
+                  <button class="btn btn-secondary btn-sm" id="reading-btn-speak" title="Đọc to bài văn">
+                    <i class="fa-solid fa-volume-high"></i>
+                  </button>
+                  <button class="btn btn-danger btn-sm" id="reading-btn-delete" title="Xóa bài đọc này">
+                    <i class="fa-solid fa-trash-can"></i>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Auto-import status bar -->
+              <div id="reading-import-bar" style="display:none; align-items:center; gap:10px; padding:10px 14px; border-radius:var(--border-radius-sm); background:rgba(123,97,255,0.08); border:1px solid rgba(123,97,255,0.25); margin-bottom:16px; font-size:12px; color:var(--text-muted);">
+                <i class="fa-solid fa-spinner fa-spin" id="reading-import-bar-icon" style="color:var(--color-primary-light);"></i>
+                <span id="reading-import-bar-text">Đang thuập từ vựng mới từ bài đọc...</span>
+              </div>
+
+              <!-- English content + word highlight tip -->
+              <div class="reading-text-box" id="reading-view-content">
+                <!-- Words rendered as clickable spans by JS -->
+              </div>
+              <p style="font-size:11px; color:var(--text-muted); margin-top:8px; font-style:italic;">
+                <i class="fa-solid fa-hand-pointer"></i> Nhấn vào bất kỳ từ nào để tra nghĩa nhanh
+              </p>
+
+              <!-- Divider -->
+              <div style="border-top: 1px solid var(--border-glass); margin: 22px 0;"></div>
+
+              <!-- Translation tool -->
+              <div class="reading-translate-panel">
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; flex-wrap:wrap; gap:10px;">
+                  <h4 style="font-size:14px; font-weight:700;">
+                    <i class="fa-solid fa-language" style="color:var(--color-secondary);"></i> Công cụ dịch
+                  </h4>
+                  <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button class="btn btn-secondary btn-sm" id="reading-btn-translate-all">
+                      <i class="fa-solid fa-globe"></i> Dịch toàn bài
+                    </button>
+                    <button class="btn btn-secondary btn-sm" id="reading-btn-clear-translate">
+                      <i class="fa-solid fa-eraser"></i> Xóa bản dịch
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Translation output -->
+                <div id="reading-translation-box" class="reading-translation-box" style="display:none;">
+                  <div id="reading-translation-content" style="line-height:1.9; font-size:14px; color:var(--text-main);"></div>
+                </div>
+
+                <!-- Word lookup popup (shown inline below text) -->
+                <div id="reading-word-lookup" class="reading-word-lookup" style="display:none;">
+                  <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+                    <span id="reading-lookup-word" style="font-size:18px; font-weight:700; color:var(--color-primary-light);"></span>
+                    <button onclick="speakWord(document.getElementById('reading-lookup-word').textContent)" 
+                      class="btn btn-secondary btn-sm" style="padding:3px 8px;">
+                      <i class="fa-solid fa-volume-high"></i>
+                    </button>
+                  </div>
+                  <div id="reading-lookup-result" style="font-size:13px; line-height:1.7; color:var(--text-muted);">
+                    Đang tra từ điển...
+                  </div>
+                  <div style="margin-top:10px; display:flex; gap:8px;">
+                    <button id="reading-btn-add-vocab" class="btn btn-primary btn-sm">
+                      <i class="fa-solid fa-plus"></i> Thêm vào kho từ vựng
+                    </button>
+                    <button onclick="document.getElementById('reading-word-lookup').style.display='none'" 
+                      class="btn btn-secondary btn-sm">
+                      <i class="fa-solid fa-xmark"></i> Đóng
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ---------------------------------------------------- -->
+  <!-- SECTION: READING (Đọc hiểu + Công cụ dịch) - appended before toast -->
+
+  <!-- Reading Section HTML is inside main, added via JS navigation -->
+
+  <!-- TOAST NOTIFICATION FOR REAL-TIME UX FEEDBACK -->
+  <div id="toast-container"
+    style="position: fixed; bottom: 30px; right: 30px; z-index: 2000; display: flex; flex-direction: column; gap: 10px;">
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>
